@@ -10,7 +10,6 @@
           ok-text="是"
           cancel-text="否"
           @confirm="deleteTableData(record.key)"
-          @cancel="cancel"
         >
           <a>删除</a>
         </a-popconfirm>
