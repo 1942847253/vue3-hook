@@ -10,6 +10,7 @@ export interface IUseTable {
   searchTableData: (name: string) => void;
 }
 
+// 实际业务为ajax异步处理，demo中使用定时器来代替
 function useTable(): IUseTable {
 
   const { getLocalStorage, setLocalStorage } = useLocalStorage();
