@@ -3,8 +3,10 @@ import { message } from "ant-design-vue";
 import { useTable } from "./useTable";
 import { IDateInerface, _initFormState } from "./baseData";
 
+
 const data = ref<IDateInerface[]>();
 const formState = ref<IDateInerface>(_initFormState);
+const name = ref<string>('');
 const configType = ref<string>("新增");
 const Loding = ref<boolean>(false);
 const visible = reactive({
@@ -45,11 +47,13 @@ function formRule(): boolean {
   }
 }
 
-function updateOver(): void {
-  setTimeout(() => {
-    Loding.value = false;
-    message.success("成功");
-  }, 800);
+function updateOver(callback:()=>void):void{
+    setTimeout(() => {
+      Loding.value = false;
+      message.success("完成");
+      callback()
+    }, 400);
+  
 }
 
 function onSubmit(): void {
@@ -88,6 +92,7 @@ export {
   formState,
   visible,
   _initFormState,
+  name,
   watchData,
   cleanFormState,
   formRule,
@@ -95,3 +100,4 @@ export {
   visibleCofig,
   updateOver,
 };
+

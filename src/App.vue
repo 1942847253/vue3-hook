@@ -1,5 +1,16 @@
 <template>
-  <a-button type="primary" @click="visibleCofig('新增')">新增</a-button>
+  <div style="display: flex; width: 400px;padding:10px">
+    <a-button style="margin-right:10px" type="primary" @click="visibleCofig('新增')">新增</a-button>
+    <a-input-search
+      v-model:value="name"
+      placeholder="请输入姓名"
+      enter-button
+      @search="searchTableData(name)"
+    />
+    <a-button style="margin-left:10px" type="primary" @click="data = dataList">
+      重置
+    </a-button>
+  </div>
   <a-table :dataSource="data" :columns="columns" :loading="Loding">
     <template #bodyCell="{ column, record }">
       <template v-if="column.dataIndex === 'edit'">
@@ -27,18 +38,19 @@ import {
   configType,
   visible,
   Loding,
+  name,
 } from "./hooks/tableBusiness";
 import { useTable } from "./hooks/useTable";
 import TableConfig from "./components/TableConfig.vue";
-import { columns } from "./hooks/baseData";
+import { columns,dataList } from "./hooks/baseData";
 export default defineComponent({
   components: {
     TableConfig,
   },
   setup() {
-    const { _initDataList, deleteTableData } = useTable();
+    const { initDataList, deleteTableData, searchTableData } = useTable();
     onMounted(() => {
-      _initDataList();
+      initDataList();
     });
     return {
       columns,
@@ -46,8 +58,12 @@ export default defineComponent({
       visible,
       configType,
       Loding,
+      name,
+      dataList,
       deleteTableData,
       visibleCofig,
+      searchTableData,
+      initDataList,
     };
   },
 });
