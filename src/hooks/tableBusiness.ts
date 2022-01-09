@@ -7,7 +7,7 @@ import { IDateInerface, _initFormState } from "./baseData";
 const data = ref<IDateInerface[]>();
 const formState = ref<IDateInerface>(_initFormState);
 const name = ref<string>('');
-const configType = ref<string>("新增");
+const configType = ref<string>("add");
 const Loding = ref<boolean>(false);
 const visible = reactive({
   config: false,
@@ -19,7 +19,7 @@ function watchData(): void {
     () => visible.config,
     (val) => {
       if (val) {
-        if (configType.value === "新增") {
+        if (configType.value === "add") {
           cleanFormState();
         }
       }
@@ -59,7 +59,7 @@ function updateOver(callback:()=>void):void{
 function onSubmit(): void {
   const { addTableData, editTableData } = useTable();
   if (formRule()) {
-    if (configType.value === "新增") {
+    if (configType.value === "add") {
       formState.value.key = Date.now();
       addTableData(JSON.parse(JSON.stringify(formState.value)));
     } else {
@@ -69,14 +69,14 @@ function onSubmit(): void {
   }
 }
 
-function visibleCofig(type: "新增" | "编辑", record?: IDateInerface): void {
+function visibleCofig(type: "add" | "edit", record?: IDateInerface): void {
   switch (type) {
-    case "新增":
-      configType.value = "新增";
+    case "add":
+      configType.value = "add";
       visible.config = true;
       break;
-    case "编辑":
-      configType.value = "编辑";
+    case "edit":
+      configType.value = "edit";
       formState.value = JSON.parse(JSON.stringify(record as IDateInerface));
       visible.config = true;
       break;

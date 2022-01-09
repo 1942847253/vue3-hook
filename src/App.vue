@@ -1,6 +1,6 @@
 <template>
   <div style="display: flex; width: 400px;padding:10px">
-    <a-button style="margin-right:10px" type="primary" @click="visibleCofig('新增')">新增</a-button>
+    <a-button style="margin-right:10px" type="primary" @click="visibleCofig('add')">新增</a-button>
     <a-input-search
       v-model:value="name"
       placeholder="请输入姓名"
@@ -14,7 +14,7 @@
   <a-table :dataSource="data" :columns="columns" :loading="Loding">
     <template #bodyCell="{ column, record }">
       <template v-if="column.dataIndex === 'edit'">
-        <a @click="visibleCofig('编辑', record)">编辑</a>
+        <a @click="visibleCofig('edit', record)">编辑</a>
         <a> | </a>
         <a-popconfirm
           title="确认删除这个吊毛吗?"
