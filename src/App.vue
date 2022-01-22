@@ -1,15 +1,6 @@
 <template>
   <div style="display: flex; width: 400px;padding:10px">
     <a-button style="margin-right:10px" type="primary" @click="visibleCofig('add')">新增</a-button>
-    <a-input-search
-      v-model:value="name"
-      placeholder="请输入姓名"
-      enter-button
-      @search="searchTableData(name)"
-    />
-    <a-button style="margin-left:10px" type="primary" @click="data = dataList">
-      重置
-    </a-button>
   </div>
   <a-table :dataSource="data" :columns="columns" :loading="Loding">
     <template #bodyCell="{ column, record }">
@@ -48,7 +39,7 @@ export default defineComponent({
     TableConfig,
   },
   setup() {
-    const { initDataList, deleteTableData, searchTableData } = useTable();
+    const { initDataList, deleteTableData } = useTable();
     onMounted(() => {
       initDataList();
     });
@@ -62,7 +53,6 @@ export default defineComponent({
       dataList,
       deleteTableData,
       visibleCofig,
-      searchTableData,
       initDataList,
     };
   },

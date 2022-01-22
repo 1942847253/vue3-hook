@@ -7,7 +7,6 @@ export interface IUseTable {
   deleteTableData: (key: number) => void;
   addTableData: (formData: IDateInerface) => void;
   editTableData: (formData: IDateInerface) => void;
-  searchTableData: (name: string) => void;
 }
 
 // 实际业务为ajax异步处理，demo中使用定时器来代替
@@ -62,25 +61,12 @@ function useTable(): IUseTable {
     
   }
 
-  function searchTableData(name: string): void {
-    if(!name.trim()) return;
-    Loding.value = true;
-    const list:IDateInerface[] = [];
-    getLocalStorage()?.forEach((item: IDateInerface, index: number) => {
-      if (item.name?.indexOf(name.trim()) !== -1) {
-        console.log((getLocalStorage() as IDateInerface[])[index]);
-        list.push(getLocalStorage()[index]);
-      }
-    });
-    updateOver(()=>data.value = list)
-  }
 
   return {
     initDataList,
     deleteTableData,
     addTableData,
     editTableData,
-    searchTableData,
   };
 }
 
